@@ -1,0 +1,88 @@
+@use '../../../responsive.scss' as *;
+
+.searchfilter{
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 40px;
+    .buttonBack{
+        display: flex;
+        padding: 0 20px;
+        margin-bottom: 20px;
+    }
+    .searchfilterInput{
+        display: flex;
+        padding: 0 20px;
+        justify-content: space-between;
+        @include mobile{
+            flex-direction: column;
+        }
+        .searchfilterInputItem{
+            width: 60%;
+            @include mobile{
+                width: 100%;
+                font-size: 15px;
+            }
+            padding: 8px 16px;
+            border: 2px solid rgb(155, 155, 155);
+            outline: none;
+            border-radius: 4px;
+            font-size: 18px;
+        }
+
+        .searchfilterInputBtn{
+            width: 30%;
+            @include mobile{
+                width: 100%;
+                margin-top: 16px;
+            }
+            font-size: 16px;
+            border-radius: 4px;
+            outline: none;
+            font-weight: 600;
+            padding: 8px 0;
+            text-align: center;
+            border: 2px solid #4f46e5;
+            transition: .2s;
+            cursor: pointer;
+            background-color: #fff;
+            color: #4f46e5;
+
+
+        }
+    }
+
+    .searchfilterList{
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 20px;
+
+        .searchfilterListItem{
+            width: calc(100%/3);
+            padding: 10px 20px;
+            @include mobile{
+                width: 100%;
+            }
+
+            .searchfilterListItemBox{
+                display: flex;
+                flex-direction: column;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                transition: .2s;
+
+                &:hover{
+                    background-color: rgb(235, 235, 235);
+                }
+
+                p{
+                    margin: 8px 0;
+                    cursor: default;
+                    user-select: none;
+                }
+
+            }
+        }
+    }
+}

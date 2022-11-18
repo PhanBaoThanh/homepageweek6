@@ -1,0 +1,140 @@
+@use '../../../responsive.scss' as *;
+
+.form{
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 40px;
+    position: relative;
+    .buttonBack{
+        display: flex;
+        padding: 0 20px;
+        @include mobile{
+            padding: 0;
+        }
+        margin-bottom: 20px;
+    }
+
+    .formBox{
+        margin-top: 40px;
+        box-shadow: 0 2px 15px #ccc;
+        padding: 32px 16px;
+        @include mobile{
+            width: 100%;
+        }
+
+        @include largeMobile{
+            width: 70%
+        }
+
+        @include mediumPc{
+            width: 50%;
+        }
+
+        @include largePc{
+            width: 40%;
+        }
+
+        margin-right: auto;
+        margin-left: auto;
+        display: flex;
+        flex-direction: column;
+
+        .formController{
+            .formControllerItemSelect{
+                margin: 8px 0 12px;
+                label{
+                    margin-right: 8px;
+                    margin-bottom: 8px;
+                }
+                .formSelect{
+                    font-size: 16px;
+                    border-radius: 4px;
+                    outline: none;
+                    text-align: center;
+                    transition: .2s;
+                    cursor: pointer;
+                }
+            }
+            .formControllerItem{
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 8px;
+
+                label{
+                    font-size: 14px;
+                    margin-bottom: 4px;
+                }
+
+                .formInput{
+                    @include mobile{
+                        font-size: 15px;
+                    }
+                    padding: 4px 8px;
+                    border: 2px solid rgb(155, 155, 155);
+                    outline: none;
+                    border-radius: 4px;
+                    margin-bottom: 4px;
+                    font-size: 16px;
+
+                    &.isErr{
+                        border-color: red;
+                    }
+                }
+
+                .formText{
+                    font-size: 13px;
+                    color: transparent;
+                    margin-left: 4px;
+                    &.err{
+                        color: red;
+                    }
+                }
+
+
+            }
+
+            .formSubmit{
+                font-size: 16px;
+                border-radius: 4px;
+                outline: none;
+                font-weight: 600;
+                padding: 8px 16px;
+                text-align: center;
+                border: 2px solid #4f46e5;
+                transition: .2s;
+                cursor: pointer;
+                background-color: #4f46e5;
+                color: #fff;
+                
+                &:hover{
+                    background-color: #fff;
+                    color: #4f46e5;
+                }
+
+            }
+        }
+
+    }
+
+    .alertBox{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        padding: 16px;
+        text-align: center;
+        padding: 30px;
+        color: #fff;
+        background-color: rgb(25,135,84);
+        border-radius: 8px;
+
+        .closeAlertBtn{
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            cursor: pointer;
+        }
+    }
+
+}

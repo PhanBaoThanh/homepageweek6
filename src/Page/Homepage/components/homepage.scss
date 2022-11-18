@@ -1,0 +1,38 @@
+@use '../../../responsive.scss' as *;
+
+.homepage{
+    width: 90vw;
+    height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .homepageItems{
+        display: flex;
+        flex-wrap: wrap;
+
+        .homepageItem{
+            padding: 16px;
+            border: 1px solid #ccc;
+            text-decoration: none;
+            color: #000;
+            border-radius: 4px;
+            margin-right: 16px;
+            margin-bottom: 16px;
+            transition: .2s;
+
+            @include mobile{
+                width: 100%;
+                margin-right: 0;
+            }
+
+            &:hover{
+                background-color: #ccc;
+            }
+        }
+        
+    }
+  
+  }
