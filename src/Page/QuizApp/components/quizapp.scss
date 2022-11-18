@@ -30,29 +30,69 @@
             width: 100%;
         }
 
-        .question{
-            font-size: 36px;
-            text-align: center;
-            @include mobile{
-                font-size: 24px;
-            }
+        .questionBox{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 36px;
+            .question{
+                max-width: 90%;
+                font-size: 36px;
+                @include mobile{
+                    font-size: 24px;
+                }
+            }
+
+            .countQuestion{
+                font-size: 24px;
+                @include mobile{
+                    font-size: 16px;
+                }
+            }
+
+
         }
 
         .answers{
             display: flex;
             flex-direction: column;
+            margin-bottom: 16px;
 
             .answer{
+                user-select: none;
                 border: 2px solid #ccc;
                 cursor: pointer;
                 padding: 12px 16px;
                 border-radius: 4px;
-                transition: .2s;
+                transition: transform .2s;
                 margin-bottom: 16px;
 
                 &:hover{
                     transform: scale(1.03);
+                }
+
+                &.isCheck{
+                    border-color: yellow;
+                }
+            }
+        }
+
+        .btns{
+            display: flex;
+            justify-content: space-between;
+
+            .btn{
+                border: 2px solid #fff;
+                transition: .2s;
+                padding: 8px 12px;
+                color: #fff;
+                background-color: transparent;
+                cursor: pointer;
+                user-select: none;
+                border-radius: 4px;
+                &.disable{
+                    opacity: .5;
+                    cursor: not-allowed;
                 }
             }
         }

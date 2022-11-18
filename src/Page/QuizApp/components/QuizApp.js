@@ -5,6 +5,7 @@ import Button from '../../Button/Button'
 const QuizApp = () => {
   const data = [
     {
+      id: 1,
       question: "1 + 1 * 2 = ?",
       answers: [
         {
@@ -27,6 +28,7 @@ const QuizApp = () => {
       ]
     },
     {
+      id: 2,
       question: "1 + 1 * 2 - 10= ?",
       answers: [
         {
@@ -49,6 +51,7 @@ const QuizApp = () => {
       ]
     },
     {
+      id: 3,
       question: "1 + 1 * 2 + (10 / 2) = ?",
       answers: [
         {
@@ -71,6 +74,7 @@ const QuizApp = () => {
       ]
     },
     {
+      id: 4,
       question: "1 + 2 * jack = ?",
       answers: [
         {
@@ -93,6 +97,7 @@ const QuizApp = () => {
       ]
     },
     {
+      id: 5,
       question: "jack * jack - jack = ?",
       answers: [
         {
@@ -115,6 +120,7 @@ const QuizApp = () => {
       ]
     },
     {
+      id: 6,
       question: "2 ^ 3 = ?",
       answers: [
         {
@@ -137,6 +143,7 @@ const QuizApp = () => {
       ]
     },
     {
+      id: 7,
       question: "(2 ^ 2) * (2 ^ 3) = ?",
       answers: [
         {
@@ -159,6 +166,7 @@ const QuizApp = () => {
       ]
     },
     {
+      id: 8,
       question: "(2 ^ 2) * 2 + (2 ^ 3) - 1 = ?",
       answers: [
         {
@@ -181,6 +189,7 @@ const QuizApp = () => {
       ]
     },
     {
+      id: 9,
       question: "(jack ^ 2 - jack / 2 + jack ) / jack = ?",
       answers: [
         {
@@ -203,6 +212,7 @@ const QuizApp = () => {
       ]
     },
     {
+      id: 10,
       question: "Biết liêm là ai không?",
       answers: [
         {
@@ -229,35 +239,87 @@ const QuizApp = () => {
   const [questions,setQuestions] = useState(data[0])
   const [point,setPoint] = useState(0)
   const [count,setCount] = useState(0)
+  const [answers,setAnswers] = useState([])
 
   const handleClickAnswer = check => {
-    if(check)
-      setPoint(prev => prev + 1)
     setCount(prev => prev + 1)
     if(count + 1 < data.length)
       setQuestions(data[count+1])
+
+
+    if(answers.find(item => item.id === questions.id)){
+      setAnswers(prev => prev.map(item => {
+        if(item.id === questions.id){
+          if(!check.isTrue && item.isTrue)
+            setPoint(prev => prev - 1)
+          else if(check.isTrue && !item.isTrue)
+            setPoint(prev => prev + 1)
+          return {
+              ...item,
+              answer: check.answer
+            }
+        }
+        return item
+      }))
+    }
+
+    else{
+      if(check.isTrue)
+        setPoint(prev => prev + 1)
+      setAnswers(prev => [
+        ...prev,
+        {
+          id: questions.id,
+          answer: check.answer,
+          isTrue: check.isTrue
+        }
+      ])
+    }
   }
 
   const handleStartAgain = () => {
     setPoint(0)
     setCount(0)
     setQuestions(data[0])
+    setAnswers([])
   }
 
+  const handleClickPrevBtn = () => {
+    if(count > 0){
+      setCount(prev => prev - 1)
+      setQuestions(data[count - 1])
+    }
+
+  }
+
+  const handleClickNextBtn = () => {
+    if(count < data.length - 1){
+      setCount(prev => prev + 1)
+      setQuestions(data[count + 1])
+    }
+  }
+ 
   return (
     <div className='quizapp'>
       <div className='quizappButtonBack'><Button /></div>
       <div className='quizappBox'>
         {
-          count < data.length - 1 ? (
+          answers.length < data.length ? (
             <>
-              <h2 className='question'>Câu hỏi: {questions.question}</h2>
+              <div className='questionBox'>
+                <h2 className='question'>Câu hỏi: {questions.question}</h2>
+                <p className='countQuestion'>{count+1}/{data.length}</p>
+              </div>
               <div className='answers'>
               {
                 questions.answers.map((item,index) => (
-                  <div className='answer' key={index} onClick={() => handleClickAnswer(item.isTrue)}>{item.answer}</div>
+                  <div className={`answer ${answers.find(i => i.answer === item.answer && i.id === questions.id) ? 'isCheck' : ''}`} key={index} onClick={() => handleClickAnswer(item)}>{item.answer}</div>
                 ))
               }
+              </div>
+              <div className='btns'>
+                <div className={`btn ${count === 0 ? 'disable' : ''}`} onClick={handleClickPrevBtn}>Prev</div>
+                <div className={`btn ${count === data.length - 1 ? 'disable' : ''}`} onClick={handleClickNextBtn}>Next</div>
               </div>
             </>
           ) : (
